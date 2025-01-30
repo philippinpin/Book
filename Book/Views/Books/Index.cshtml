@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BookstoreApp.Models.Book>
+
+<h2 class="mb-4">Book List</h2>
+
+@if (!Model.Any())
+{
+    <p class="alert alert-info text-dark">No books available. Click <a asp-action="Create">here</a> to add one.</p>
+}
+else
+{
+    <table class="table table-dark table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Price:C</td>
+                    <td>@book.PublicationYear</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Create" class="btn btn-primary mt-3">Add New Book</a>
